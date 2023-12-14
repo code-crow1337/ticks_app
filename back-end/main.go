@@ -2,7 +2,11 @@ package main
 
 import (
 	"e-identitet/tick-api/routes"
+<<<<<<< HEAD
 	"log"
+=======
+	"fmt"
+>>>>>>> be1aaa1 (initial commit for the back-end endpoints)
 )
 
 //liveness route
