@@ -1,9 +1,96 @@
+@import "variable.scss";
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: salmon;
+  font-family: "Roboto", sans-serif;
+  background-color: $primary500;
+  height: 100vh;
+  color: #fff;
+}
+
+.App {
+  display: flex;
+  flex: 1;
+  height: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10vw;
+  background-color: $primary300;
+
+  &__hero-container {
+    padding: 24px;
+  }
+  &__content-container {
+    padding: 16px;
+    width: 100%;
+  }
+}
+.search-field {
+  display: flex;
+  width: 100%;
+
+  filter: drop-shadow(0px 4px 0px #072431);
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: $neutral300;
+    background-color: #fff;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 4px 0px 0px 4px;
+  }
+  input {
+    flex: 1;
+    border-radius: 0px;
+    padding: 4px 8px;
+    border: 0px none;
+    background-color: #fff;
+    height: 32px;
+    min-width: fit-content;
+    font-size: 16px;
+    padding-top: 6px;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  button {
+    background-color: $primary100;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 0px 4px 4px 0px;
+    padding: 0px 16px;
+  }
+}
+button {
+  background-color: $primary100;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 0px 4px 4px 0px;
+  padding: 0px 16px;
+  &:active {
+    background-color: $primary400;
+  }
+  &:hover {
+    background-color: $primary50;
+    transition: background-color 0.2s ease-in-out;
+  }
+  &:active {
+    background-color: $primary300;
+    transition: background-color 0.2s ease-in-out;
+  }
 }
