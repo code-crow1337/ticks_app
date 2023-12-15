@@ -39,7 +39,6 @@ services:
 
 volumes:
   pg_data:
-
 networks:
   tick_network:
     driver: bridge
