@@ -9,9 +9,11 @@ services:
       - DATABASE_HOST=${DB_HOST}
       - DATABASE_PORT=${DB_PORT}
     tty: true 
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - 8000:8080
+      - 8080:80
     restart: on-failure
     volumes:
       - .:/app

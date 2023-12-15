@@ -2,7 +2,7 @@ package main
 
 import (
 	"e-identitet/tick-api/routes"
-	"fmt"
+	"log"
 )
 
 //liveness route
@@ -11,8 +11,8 @@ import (
 //find specfic tic sms, bankid-auth, bankid-sign, SPAR
 
 func main() {
-	fmt.Println("Main running")
-	//liveness route
+	logger := log.Default()
+	logger.Print("Server is up an running 🌱")
 	r := routes.SetupRouter()
-	r.Run(":8080")
+	r.Run(":80")
 }
