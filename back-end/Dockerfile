@@ -2,6 +2,7 @@
 
 FROM golang:1.21.5-alpine AS build
 
+RUN mkdir /app
 WORKDIR /app
 
 RUN apk update && apk add --no-cache git && apk add --no-cach bash && apk add build-base
@@ -13,8 +14,7 @@ RUN go get -d -v ./...
 
 RUN go install -v ./...
 
-RUN go build -o /build
+RUN go install -mod=mod github.com/githubnemo/CompileDaemon
+RUN go get -v golang.org/x/tools/gopls
 
-EXPOSE 8080
-
-CMD [ "/build" ]
+ENTRYPOINT CompileDaemon –build=”go build -a -installsuffix cgo -o main .” –command=./main

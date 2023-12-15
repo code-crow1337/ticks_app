@@ -9,7 +9,7 @@ import (
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "Hello there!") //would be nice to render an image
+		ctx.String(http.StatusOK, "Hello there!!")
 
 	})
 	r.GET("/ticks/all", func(ctx *gin.Context) {
