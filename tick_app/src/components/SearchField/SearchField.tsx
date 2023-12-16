@@ -9,14 +9,15 @@ export const SearchField = () => {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.MouseEvent<HTMLAnchorElement>,
-    value?: string | undefined
+    companyName?: string | undefined
   ) => {
     e.preventDefault();
     if ("value" in e.target) {
       setSearchInput(e.target.value);
     }
-    if (value) {
-      setSearchInput(value);
+    if (companyName) {
+      setSearchFieldIsFocused(false);
+      setSearchInput(companyName);
     }
   };
 
@@ -27,10 +28,9 @@ export const SearchField = () => {
         <input
           type="text"
           placeholder="Company Name..."
-          value={searchInput && searchInput}
+          value={searchInput}
           onChange={handleOnChange}
           onFocus={() => setSearchFieldIsFocused(true)}
-          onBlur={() => setSearchFieldIsFocused(false)}
         />
         <button onClick={() => console.log({ submitvalue: searchInput })}>
           Submit

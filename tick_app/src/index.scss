@@ -77,7 +77,6 @@ body {
       visibility: hidden;
       max-height: 0px;
       transition: max-height 1s ease-out;
-      background-color: red;
     }
     &--show {
       visibility: visible;
@@ -93,6 +92,11 @@ body {
         font-weight: 700;
         color: $neutral300;
         border-top: 1px solid $neutral300;
+        &:hover {
+          background-color: $primary100;
+          color: #fff;
+          transition: all 0.25s ease-in-out;
+        }
         &:first-child {
           border-top: none;
         }
