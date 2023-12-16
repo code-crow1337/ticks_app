@@ -12,7 +12,10 @@ export const App = () => {
       <main className="App__content-container">
         <SearchField />
         <div>Tick Summary Tool</div>
-        <LoadingIcon size="sm" />
+        {
+          /*     <LoadingIcon size="sm" /> */
+          //Use for latter
+        }
       </main>
     </main>
   );
