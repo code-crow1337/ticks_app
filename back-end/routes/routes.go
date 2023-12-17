@@ -2,6 +2,7 @@ package routes
 
 import (
 	"e-identitet/tick-api/data"
+	"e-identitet/tick-api/utils"
 	"log"
 	"net/http"
 
@@ -9,7 +10,7 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
-	logger := log.Default()
+
 	r := gin.Default()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
@@ -19,10 +20,12 @@ func SetupRouter() *gin.Engine {
 
 	})
 	r.GET("/company", func(ctx *gin.Context) {
+		companies := GetCompanies(db)
+		ctx.JSON(http.StatusOK, companies)
+	})
+	r.GET("/company/names", func(ctx *gin.Context) {
 		companyNames := GetCompanyNames(db)
-		logger.Print("🥑", companyNames)
 		ctx.JSON(http.StatusOK, companyNames)
-
 	})
 	r.GET("/company/:name", func(ctx *gin.Context) { //single company name
 		companyName := ctx.Param("name")
@@ -33,7 +36,15 @@ func SetupRouter() *gin.Engine {
 	})
 	r.GET("/tick/:tickType", func(ctx *gin.Context) {
 		tickType := ctx.Param("tickType")
-		ctx.JSON(http.StatusOK, tickType)
+		validTickTypes := []string{BankidAuth, BankidAuth, SparLookup, SmsAuth}
+		log.Print("🌱", utils.IsInArray(tickType, validTickTypes))
+		if utils.IsInArray(tickType, validTickTypes) {
+			ticksBasedOnType := GetTickByType(db, tickType)
+			ctx.JSON(http.StatusOK, ticksBasedOnType)
+		} else {
+			ctx.JSON(http.StatusBadRequest, "Not valid tick type")
+		}
+
 	})
 	return r
 }

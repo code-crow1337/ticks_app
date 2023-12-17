@@ -6,10 +6,26 @@ import (
 	"log"
 )
 
-func GetCompanyNames(db *sql.DB) []string {
-	rows, companyTableErr := db.Query("SELECT company_name FROM company;")
+func GetCompanies(db *sql.DB) []Company {
+	rows, err := db.Query("SELECT * FROM company;")
 	checkError := utils.CheckError
-	checkError(companyTableErr)
+	checkError(err)
+	companies := make([]Company, 0)
+	for rows.Next() {
+		var company Company
+		if err := rows.Scan(&company.CompanyId, &company.CompanyName, &company.CompanyAddress, &company.CompanyMail, &company.CompanyPhone); err != nil {
+			log.Fatal(err)
+		}
+
+		companies = append(companies, company)
+	}
+	return companies
+}
+
+func GetCompanyNames(db *sql.DB) []string {
+	rows, err := db.Query("SELECT company_name FROM company;")
+	checkError := utils.CheckError
+	checkError(err)
 	names := make([]string, 0)
 	for rows.Next() {
 		var name string
@@ -25,9 +41,9 @@ func GetCompany(db *sql.DB) {
 }
 
 type Company struct {
-	companyName    string
-	companyId      string
-	companyAddress string
-	companyPhone   string
-	companyMail    string
+	CompanyName    string `json:"companyName"`
+	CompanyId      string `json:"companyId"`
+	CompanyAddress string `json:"companyAddress"`
+	CompanyPhone   string `json:"companyPhone"`
+	CompanyMail    string `json:"companyMail"`
 }
