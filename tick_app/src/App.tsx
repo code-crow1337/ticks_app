@@ -1,9 +1,12 @@
 import React from "react";
 import "./App.scss";
+import { useFetchApi } from "./hooks/useFetchAPI";
 import { SearchField } from "./components/SearchField/SearchField";
 import { LoadingIcon } from "./components/LoadingIcon/LoadingIcon";
 
 export const App = () => {
+  const { data, error, isLoading } = useFetchApi("/company");
+  console.log({ data });
   return (
     <main className="App">
       <header className="App__hero-container">

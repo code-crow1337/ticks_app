@@ -5,12 +5,16 @@ import (
 	"e-identitet/tick-api/utils"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
 
 	r := gin.Default()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	r.Use(cors.New(config))
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	db := data.InitDatabase()
