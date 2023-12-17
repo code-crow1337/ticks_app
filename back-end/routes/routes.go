@@ -32,7 +32,8 @@ func SetupRouter() *gin.Engine {
 	})
 	r.GET("/company/:name", func(ctx *gin.Context) {
 		companyName := ctx.Param("name")
-		ctx.JSON(http.StatusOK, companyName)
+		company := GetCompany(db, companyName)
+		ctx.JSON(http.StatusOK, company)
 	})
 	r.GET("/tick", func(ctx *gin.Context) { //maybe not needed
 		ctx.String(http.StatusOK, "All the ticks")

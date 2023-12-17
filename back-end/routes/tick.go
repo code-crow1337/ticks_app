@@ -10,14 +10,13 @@ func GetTicks() {
 
 }
 func GetTickByType(db *sql.DB, tickType string) []Tick {
-
 	rows, err := db.Query(formatQuery(tickType))
 	checkError := utils.CheckError
 	checkError(err)
 	ticks := make([]Tick, 0)
 	for rows.Next() {
 		var tick Tick
-		if err := rows.Scan(&tick.CompanyId, &tick.TickId, &tick.CoreService, &tick.TypeTick, &tick.Date); err != nil {
+		if err := rows.Scan(&tick.CompanyIdFK, &tick.TickId, &tick.CoreService, &tick.TypeTick, &tick.Date); err != nil {
 			log.Fatal(err)
 		}
 
@@ -48,7 +47,7 @@ const (
 )
 
 type Tick struct {
-	CompanyId   string `json:"CompanyId"`
+	CompanyIdFK string `json:"CompanyIdFK"`
 	TickId      string `json:"tickId"`
 	CoreService string `json:"coreService"`
 	TypeTick    string `json:"typeTick"`
