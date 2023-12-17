@@ -1,8 +1,14 @@
 import React from "react";
+import { generateURLFriendlyName } from "../../utils/utils";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-export const SearchField = () => {
+export const SearchField = ({ options }: { options: string[] }) => {
   // ? Would be nice to have auto complete, or suggestions in a dropdown
-  const [searchInput, setSearchInput] = React.useState("");
+  let { companyName } = useParams();
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = React.useState(
+    companyName ? companyName : ""
+  );
   const [searchFieldIsFocused, setSearchFieldIsFocused] = React.useState(false);
 
   const handleOnChange = (
@@ -17,6 +23,7 @@ export const SearchField = () => {
     }
     if (companyName) {
       setSearchFieldIsFocused(false);
+      navigate(`/company/${generateURLFriendlyName(companyName)}`);
       setSearchInput(companyName);
     }
   };
@@ -41,26 +48,21 @@ export const SearchField = () => {
           searchFieldIsFocused ? "show" : "hide"
         }`}
       >
-        {mockCompanies
-          .filter((company) => {
+        {options
+          .filter((option) => {
             const regex = new RegExp(`${searchInput}`, "gi");
-            return !!company.name.match(regex);
+            return !!option.match(regex);
           })
-          .map((company) => (
-            <a
-              href={company.query} //Would be nice to use the url without actually loading the page. But then I need react-router
-              key={company.query}
-              onClick={(e) => handleOnChange(e, company.name)}
+          .map((option) => (
+            <Link
+              to={`/company/${generateURLFriendlyName(option)}`}
+              key={option}
+              onClick={(e) => handleOnChange(e, option)}
             >
-              {company.name}
-            </a>
+              {option}
+            </Link>
           ))}
       </div>
     </div>
   );
 };
-const mockCompanies = [
-  { name: "Kanelbullens konditori", query: "kanelbullens-konditori" },
-  { name: "Lucifiers lusse cafe", query: "lucifiers-lusse-cafe" },
-  { name: "Linnes konditori", query: "linnes-konditori" },
-];
