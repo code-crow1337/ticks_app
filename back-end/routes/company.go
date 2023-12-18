@@ -14,7 +14,7 @@ func GetCompanies(db *sql.DB) []CompanyWithTick {
 	companies := make([]CompanyWithTick, 0)
 	for rows.Next() {
 		var company CompanyWithTick
-		if err := rows.Scan(&company.CompanyId, &company.CompanyName, &company.CompanyAddress, &company.CompanyMail, &company.CompanyPhone, &company.TickId, &company.TypeTick, &company.CoreService, &company.Date); err != nil {
+		if err := rows.Scan(&company.CompanyId, &company.CompanyName, &company.CompanyAddress, &company.CompanyPhone, &company.CompanyMail, &company.TickId, &company.CoreService, &company.Date, &company.TypeTick); err != nil {
 			log.Fatal(err)
 		}
 
