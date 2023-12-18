@@ -27,7 +27,6 @@ export const SearchField = ({ options }: { options: string[] }) => {
       setSearchInput(companyName);
     }
   };
-
   return (
     <div className="search-field">
       <div className="search-field__search">

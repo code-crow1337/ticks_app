@@ -7,9 +7,11 @@ import { TickTable } from "./components/TickTable/TickTable";
 import { Company } from "./types";
 
 export const App = () => {
-  const { data, error, isLoading } = useFetchApi("/company");
-  const companyNames =
-    data && data.map((company: Company) => company.companyName);
+  const {
+    data: companyNames,
+    error,
+    isLoading,
+  } = useFetchApi("/company/names");
   return (
     <main className="App">
       <header className="App__hero-container">
@@ -24,7 +26,7 @@ export const App = () => {
             <SearchField options={companyNames} />
           </>
         )}
-        <TickTable companies={data} />
+        <TickTable />
       </main>
     </main>
   );
