@@ -21,7 +21,6 @@ export const TickTable = () => {
       (company) => company.companyName.toLowerCase() === companyName
     );
   }
-  console.log({ companyName, singleCompany });
   return (
     <>
       {companyName ? (
@@ -49,7 +48,10 @@ export const TickTable = () => {
         </div>
       ) : (
         formatedData.map((company) => (
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column" }}
+            key={`${company.companyId}_${company.companyName}`}
+          >
             <div>
               <b>Name:</b>
               {company.companyName}
